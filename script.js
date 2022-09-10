@@ -1,3 +1,9 @@
+// THINGS I WOULD LIKE :
+// ABILITY TO DO MATH BETWEEN BASES
+
+
+
+
 const INT_ARR_GREATER_THAN_TEN = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+/".split('')
 
 const input = document.getElementById("input");
@@ -6,6 +12,7 @@ const button = document.getElementById("button");
 const radioInputChooser = document.getElementById("radio11")
 const radioOutputChooser = document.getElementById("radio11O")
 const radioButtons = document.getElementsByClassName("radios")
+
 let inputChooser = null;
 let outputChooser = null;
 
@@ -14,6 +21,7 @@ let outputChooser = null;
 // IT SHOULD TAKE A NUMBER,
 // PARSE IT'S BASE 10 VALUE USING THE ARRAY,
 // AND CONVERT THAT VALUE INTO THE TARGET BASE
+
 function bigBases(givenNumber, givenBase, targetBase) {
     const SET_ARRAY = INT_ARR_GREATER_THAN_TEN.slice(0, givenBase);
 
@@ -32,11 +40,6 @@ function bigBases(givenNumber, givenBase, targetBase) {
     solution.appendChild(newLine);
 
 }
-
-
-
-
-
 
 radioInputChooser.addEventListener("click", () => { 
 
@@ -99,7 +102,14 @@ button.addEventListener("click", () => {
             solution.appendChild(newLine);
             return;
         }
+
+        // THIS IS THE NUMBER IN BASE 10.
+        // PUT A IF BLOCK AFTER THIS TO RETURN IF 
+        // THE USER SELECTED "10" AS THE OUTPUT BASE
+        // TO SAVE SOME COMPUTATIONS.
+
         integerSolution += (inputArray[i] * Math.pow(radioSelection, inputArray.length - i - 1));
+
     }
 
     let solutionArray = [];
