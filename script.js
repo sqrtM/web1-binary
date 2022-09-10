@@ -9,6 +9,35 @@ const radioButtons = document.getElementsByClassName("radios")
 let inputChooser = null;
 let outputChooser = null;
 
+// FUNCTION DOESNT WORK
+// I MESSED UP AND WROTE IT WRONG
+// IT SHOULD TAKE A NUMBER,
+// PARSE IT'S BASE 10 VALUE USING THE ARRAY,
+// AND CONVERT THAT VALUE INTO THE TARGET BASE
+function bigBases(givenNumber, givenBase, targetBase) {
+    const SET_ARRAY = INT_ARR_GREATER_THAN_TEN.slice(0, givenBase);
+
+    let answerArray = []
+    let multiplesOfBase = 0;
+    let firstDigit = givenNumber;
+    while (givenNumber > givenBase) {
+        firstDigit -= givenBase;
+        multiplesOfBase++;
+    }
+    answerArray.unshift(SET_ARRAY[firstDigit]);
+    answerArray.unshift(SET_ARRAY[multiplesOfBase]);
+
+    let newLine = document.createElement("p");
+    newLine.innerHTML = `${SET_ARRAY} ${answerArray}`;
+    solution.appendChild(newLine);
+
+}
+
+
+
+
+
+
 radioInputChooser.addEventListener("click", () => { 
 
     if (inputChooser == null){
