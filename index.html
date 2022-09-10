@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>base agnostic calculations</title>
+  </head>
+  <body>
+    <h1>base agnostic calculations</h1>
+    <p>select a base for the first number</p>
+    <div>
+      <input type="radio" id="radio2"
+       name="inputselect" value="2" class="radios" checked>
+      <label for="baseChoice2">base 2 (binary)</label>
+
+      <input type="radio" id="radio3"
+       name="inputselect" value="3" class="radios">
+      <label for="baseChoice3">base 3 (ternary)</label>
+
+      <input type="radio" id="radio4"
+       name="inputselect" value="4" class="radios">
+      <label for="baseChoice4">base 4 (quaternary)</label>
+    </div>
+    <div>
+      <input type="radio" id="radio5"
+       name="inputselect" value="5" class="radios">
+      <label for="baseChoice5">base 5 (quinary)</label>
+
+      <input type="radio" id="radio6"
+       name="inputselect" value="6" class="radios">
+      <label for="baseChoice6">base 6 (senary)</label>
+
+      <input type="radio" id="radio7"
+       name="inputselect" value="7" class="radios">
+      <label for="baseChoice7">base 7 (septenary)</label>
+    </div>
+    <div>
+      <input type="radio" id="radio8"
+       name="inputselect" value="8" class="radios">
+      <label for="baseChoice8">base 8 (octal)</label>
+
+      <input type="radio" id="radio9"
+       name="inputselect" value="9" class="radios">
+      <label for="baseChoice9">base 9 (nonary)</label>
+
+      <input type="radio" id="radio10"
+       name="inputselect" value="10" class="radios">
+      <label for="baseChoice10">base 10 (decimal)</label>
+    </div>
+    <div id="divchooser1">
+      <input type="radio" id="radio11"
+       name="inputselect" value="0">
+      <label for="baseChoice11">... or insert a base of your choosing (up to 64)</label>
+    </div>
+    <input type="text" name="input" id="input" placeholder="enter a number">
+    <p>select a base for the output</p>
+    <div>
+      <input type="radio" id="radio2O"
+       name="outputselect" value="2" class="radiosO">
+      <label for="baseChoice2">base 2 (binary)</label>
+
+      <input type="radio" id="radio3O"
+       name="outputselect" value="3" class="radiosO">
+      <label for="baseChoice3">base 3 (ternary)</label>
+
+      <input type="radio" id="radio4O"
+       name="outputselect" value="4" class="radiosO">
+      <label for="baseChoice4">base 4 (quaternary)</label>
+    </div>
+    <div>
+      <input type="radio" id="radio5O"
+       name="outputselect" value="5" class="radiosO">
+      <label for="baseChoice5">base 5 (quinary)</label>
+
+      <input type="radio" id="radio6O"
+       name="outputselect" value="6" class="radiosO">
+      <label for="baseChoice6">base 6 (senary)</label>
+
+      <input type="radio" id="radio7O"
+       name="outputselect" value="7" class="radiosO">
+      <label for="baseChoice7">base 7 (septenary)</label>
+    </div>
+    <div>
+      <input type="radio" id="radio8O"
+       name="outputselect" value="8" class="radiosO">
+      <label for="baseChoice8">base 8 (octal)</label>
+
+      <input type="radio" id="radio9O"
+       name="outputselect" value="9" class="radiosO">
+      <label for="baseChoice9">base 9 (nonary)</label>
+
+      <input type="radio" id="radio10O"
+       name="outputselect" value="10" class="radiosO" checked>
+      <label for="baseChoice10">base 10 (decimal)</label>
+    </div>
+    <div id="divchooser2">
+      <input type="radio" id="radio11O"
+       name="outputselect" value="0">
+      <label for="baseChoice11">... or insert a base of your choosing (up to 64)</label>
+    </div>
+    <input type="button" value="enter" id="button">
+    <div id="solution"></div>
+  </body>
+  <script src="script.js"></script>
+</html>
