@@ -5,6 +5,7 @@ const RADIOINPUTCHOOSER  = document.getElementById("radio11")
 const RADIOOUTPUTCHOOSER = document.getElementById("radio11O")
 const OPBASECHOOSER      = document.getElementById("radioOp11")
 const OPERATIONSINPUT    = document.getElementById("operationsinput")
+const DELETEBUTTON       = document.getElementById("clear")
 
 const ADDITION       = (x, y) => { return x + y }
 const SUBTRACTION    = (x, y) => { return x - y }
@@ -15,7 +16,10 @@ let inputChooser     = null;
 let outputChooser    = null;
 let operationChooser = null;
 
-////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+
 
 RADIOINPUTCHOOSER.addEventListener("click", () => { 
 
@@ -53,8 +57,17 @@ OPBASECHOOSER.addEventListener("click", () => {
 
 })
 
+DELETEBUTTON.addEventListener("click", () => { 
+    const ELEMENTS = document.getElementsByClassName("calculations");
+    while(ELEMENTS.length > 0) {
+        ELEMENTS[0].parentNode.removeChild(ELEMENTS[0]);
+    }
+})
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // ON BUTTON PRESS // ON BUTTON PRESS // ON BUTTON PRESS // ON BUTTON PRESS // ON BUTTON PRESS //
+/////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 BUTTON.addEventListener("click", () => {
@@ -68,6 +81,7 @@ BUTTON.addEventListener("click", () => {
     let inputArray = Array.from(inputNumber.toString()).map(Number);
     if (inputArray == "") {
         let newLine = document.createElement("p");
+        newLine.setAttribute("class", "calculations");
         newLine.innerHTML = `please enter a valid input`;
         SOLUTION.appendChild(newLine);
         return;   
@@ -97,9 +111,10 @@ BUTTON.addEventListener("click", () => {
         return;
     }    
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // CONVERSION // NO ARITHMETIC // CONVERSION // NO ARITHMETIC // CONVERSION // NO ARITHMETIC // CONVERSION //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     if (document.querySelector('input[name="operations"]:checked').value == "convert") {
@@ -108,13 +123,15 @@ BUTTON.addEventListener("click", () => {
 
             if (inputArray[i] >= radioSelection) {
                 let newLine = document.createElement("p");
+                newLine.setAttribute("class", "calculations");
                 newLine.innerHTML = `Not a valid input, as ${inputArray[i]} is outside the scope of the chosen base.`;
                 SOLUTION.appendChild(newLine);
                 return;        
             }
             else if (radioSelection == radioOutput) {
                 let newLine = document.createElement("p");
-                newLine.innerHTML = `${inputNumber} in base ${radioSelection} would be ${inputNumber} in base ${radioOutput}.`;
+                newLine.setAttribute("class", "calculations");
+                newLine.innerHTML = `(${inputNumber})${radioSelection.sub()} = (${inputNumber})${radioOutput.sub()}`;
                 SOLUTION.appendChild(newLine);
                 return;
             }
@@ -138,12 +155,15 @@ BUTTON.addEventListener("click", () => {
 
     
         let newLine = document.createElement("p");
-        newLine.innerHTML = `${inputNumber} in base ${radioSelection} would be ${convertedInteger} in base ${radioOutput}.`;
+        newLine.setAttribute("class", "calculations");
+        newLine.innerHTML = `(${inputNumber})${radioSelection.sub()} = (${convertedInteger})${radioOutput.sub()}`;
         SOLUTION.appendChild(newLine);
     }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ARITHMETIC // ARITHMETIC // ARITHMETIC // ARITHMETIC // ARITHMETIC // ARITHMETIC // ARITHMETIC // ARITHMETIC //
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     else {
@@ -152,6 +172,7 @@ BUTTON.addEventListener("click", () => {
 
         if (operandArray == "") {
             let newLine = document.createElement("p");
+            newLine.setAttribute("class", "calculations");
             newLine.innerHTML = `please enter a valid operand`;
             SOLUTION.appendChild(newLine);
             return;   
@@ -176,48 +197,41 @@ BUTTON.addEventListener("click", () => {
             opString = "/";
         }
 
+        if (radioSelection == radioOutput == radioOpSelect) {
+            let calculatedInteger = operation(inputNumber, OPERATIONSINPUT.value)
+            let newLine = document.createElement("p");
+            newLine.setAttribute("class", "calculations");
+            newLine.innerHTML = `(${inputNumber})${radioSelection.sub()} ${opString} (${OPERATIONSINPUT.value})${radioOutput.sub()} = ${calculatedInteger}`;
+            SOLUTION.appendChild(newLine);
+            return;
+            }    
+
         for (let i = 0; i < inputArray.length; i++) {
 
             if (inputArray[i] >= radioSelection) {
                 let newLine = document.createElement("p");
+                newLine.setAttribute("class", "calculations");
                 newLine.innerHTML = `Not a valid input`;
                 SOLUTION.appendChild(newLine);
                 return;    
             }
-                // CHECK THIS IN A SEC, IM NOT SO SURE. .... .. . . . ..
-            else if (radioSelection == radioOutput == radioOpSelect) {
-                let calculatedInteger = operation(inputNumber, OPERATIONSINPUT.value)
-                let newLine = document.createElement("p");
-                newLine.innerHTML = `${inputNumber} base ${radioSelection} ${opString} ${OPERATIONSINPUT.value} base ${radioOutput} equals ${calculatedInteger}.`;
-                SOLUTION.appendChild(newLine);
-                return;
-                }    
-
 
             inputInBase10 += (inputArray[i] * Math.pow(radioSelection, inputArray.length - i - 1));
-
         }
 
         for (let j = 0; j < operandArray.length; j++) {
 
             if (operandArray[j] >= radioOpSelect) {
                 let newLine = document.createElement("p");
+                newLine.setAttribute("class", "calculations");
                 newLine.innerHTML = `Not a valid input`;
                 SOLUTION.appendChild(newLine);
                 return;    
-            }
-                // CHECK THIS IN A SEC, IM NOT SO SURE. .... .. . . . ..
-            else if (radioSelection == radioOutput == radioOpSelect) {
-                let calculatedInteger = operation(inputNumber, OPERATIONSINPUT.value)
-                let newLine = document.createElement("p");
-                newLine.innerHTML = `${inputNumber} base ${radioSelection} ${opString} ${OPERATIONSINPUT.value} base ${radioOutput} equals ${calculatedInteger}.`;
-                SOLUTION.appendChild(newLine);
-                return;
-                }    
+            }  
 
             operandInBase10 += (operandArray[j] * Math.pow(radioOpSelect, operandArray.length - j - 1));
 
-            }
+        }
 
         solutionInBase10 = operation(inputInBase10, operandInBase10);
 
@@ -236,7 +250,8 @@ BUTTON.addEventListener("click", () => {
 
     
         let newLine = document.createElement("p");
-        newLine.innerHTML = `${inputNumber} base ${radioSelection} ${opString} ${OPERATIONSINPUT.value} base ${radioOpSelect} equals ${convertedInteger} base ${radioOutput}.`;
+        newLine.setAttribute("class", "calculations");
+        newLine.innerHTML = `(${inputNumber})${radioSelection.sub()} ${opString} (${OPERATIONSINPUT.value})${radioOpSelect.sub()} = (${convertedInteger})${radioOutput.sub()}`;
         SOLUTION.appendChild(newLine);
     }
 })
