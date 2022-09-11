@@ -51,6 +51,65 @@
       <label for="baseChoice11">... or insert a base of your choosing (up to 64)</label>
     </div>
     <input type="text" name="input" id="input" placeholder="enter a number">
+    <p>select an operation <br>
+      if no operation is selected <br> 
+      a basic conversion will be executed
+    </p>
+    <div id="operationschooser">
+      <input type="radio" value="add" id="add" class="operations" name="operations"><label for="add">+ add</label>
+      <input type="radio" value="sub" id="sub" class="operations" name="operations"><label for="sub">- subtract</label>
+      <input type="radio" value="mult" id="mult" class="operations" name="operations"><label for="mult">* multiply</label>
+      <input type="radio" value="divide" id="divide" class="operations" name="operations"><label for="divide">/ divide</label>
+      <input type="radio" value="convert" id="convert" class="operations" name="operations" checked><label for="convert">convert</label>
+      <div>
+        <input type="text" id="operationsinput" class="operations" name="operations" placeholder="enter operand (if needed)">
+      </div>
+      <div>
+        <input type="radio" id="radioOp2"
+         name="opbaseselect" value="2" class="radioOp" checked>
+        <label for="baseChoice2">base 2 (binary)</label>
+  
+        <input type="radio" id="radioOp3"
+         name="opbaseselect" value="3" class="radioOp">
+        <label for="baseChoice3">base 3 (ternary)</label>
+  
+        <input type="radio" id="radioOp4"
+         name="opbaseselect" value="4" class="radioOp">
+        <label for="baseChoice4">base 4 (quaternary)</label>
+      </div>
+      <div>
+        <input type="radio" id="radioOp5"
+         name="opbaseselect" value="5" class="radioOp">
+        <label for="baseChoice5">base 5 (quinary)</label>
+  
+        <input type="radio" id="radioOp6"
+         name="opbaseselect" value="6" class="radioOp">
+        <label for="baseChoice6">base 6 (senary)</label>
+  
+        <input type="radio" id="radioOp7"
+         name="opbaseselect" value="7" class="radioOp">
+        <label for="baseChoice7">base 7 (septenary)</label>
+      </div>
+      <div>
+        <input type="radio" id="radioOp8"
+         name="opbaseselect" value="8" class="radioOp">
+        <label for="baseChoice8">base 8 (octal)</label>
+  
+        <input type="radio" id="radioOp9"
+         name="opbaseselect" value="9" class="radioOp">
+        <label for="baseChoice9">base 9 (nonary)</label>
+  
+        <input type="radio" id="radioOp10"
+         name="opbaseselect" value="10" class="radioOp">
+        <label for="baseChoice10">base 10 (decimal)</label>
+      </div>
+      <div id="divchooser3">
+        <input type="radio" id="radioOp11"
+         name="opbaseselect" value="0">
+        <label for="baseChoice11">... or insert a base of your choosing (up to 64)</label>
+      </div>
+    
+    </div>
     <p>select a base for the output</p>
     <div>
       <input type="radio" id="radio2O"
