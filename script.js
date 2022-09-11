@@ -1,50 +1,21 @@
-// THINGS I WOULD LIKE :
-// ABILITY TO DO MATH BETWEEN BASES
-// HAVE DECIMAL AND NEGATIVE NUMBERS
-
-const INT_ARR_GREATER_THAN_TEN = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+/".split('')
-
-const INPUT = document.getElementById("input");
-const SOLUTION = document.getElementById("solution");
-const BUTTON = document.getElementById("button");
-const RADIOINPUTCHOOSER = document.getElementById("radio11")
+const INPUT              = document.getElementById("input");
+const SOLUTION           = document.getElementById("solution");
+const BUTTON             = document.getElementById("button");
+const RADIOINPUTCHOOSER  = document.getElementById("radio11")
 const RADIOOUTPUTCHOOSER = document.getElementById("radio11O")
-const OPBASECHOOSER = document.getElementById("radioOp11")
-const OPERATIONSINPUT = document.getElementById("operationsinput")
+const OPBASECHOOSER      = document.getElementById("radioOp11")
+const OPERATIONSINPUT    = document.getElementById("operationsinput")
 
-const ADDITION = (x, y) => { return x + y }
-const SUBTRACTION = (x, y) => { return x - y }
+const ADDITION       = (x, y) => { return x + y }
+const SUBTRACTION    = (x, y) => { return x - y }
 const MULTIPLICATION = (x, y) => { return x * y }
-const DIVISION = (x, y) => { return x / y }
+const DIVISION       = (x, y) => { return x / y }
 
-let inputChooser = null;
-let outputChooser = null;
+let inputChooser     = null;
+let outputChooser    = null;
 let operationChooser = null;
 
-// FUNCTION DOESNT WORK
-// I MESSED UP AND WROTE IT WRONG
-// IT SHOULD TAKE A NUMBER,
-// PARSE IT'S BASE 10 VALUE USING THE ARRAY,
-// AND CONVERT THAT VALUE INTO THE TARGET BASE
-
-function bigBases(givenNumber, givenBase, targetBase) {
-    const SET_ARRAY = INT_ARR_GREATER_THAN_TEN.slice(0, givenBase);
-
-    let answerArray = []
-    let multiplesOfBase = 0;
-    let firstDigit = givenNumber;
-    while (givenNumber > givenBase) {
-        firstDigit -= givenBase;
-        multiplesOfBase++;
-    }
-    answerArray.unshift(SET_ARRAY[firstDigit]);
-    answerArray.unshift(SET_ARRAY[multiplesOfBase]);
-
-    let newLine = document.createElement("p");
-    newLine.innerHTML = `${SET_ARRAY} ${answerArray}`;
-    SOLUTION.appendChild(newLine);
-
-}
+////////////////////////////////////////////////////
 
 RADIOINPUTCHOOSER.addEventListener("click", () => { 
 
@@ -82,12 +53,17 @@ OPBASECHOOSER.addEventListener("click", () => {
 
 })
 
+/////////////////////////////////////////////////////////////////////////////////////////////////
+// ON BUTTON PRESS // ON BUTTON PRESS // ON BUTTON PRESS // ON BUTTON PRESS // ON BUTTON PRESS //
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
 BUTTON.addEventListener("click", () => {
 
     let inputInBase10  = 0;
     let inputNumber = INPUT.value;
     let operandInBase10  = 0;
     let operandNumber = OPERATIONSINPUT.value;
+    let solutionInBase10 = 0;
 
     let inputArray = Array.from(inputNumber.toString()).map(Number);
     if (inputArray == "") {
@@ -114,17 +90,17 @@ BUTTON.addEventListener("click", () => {
     }
 
     let radioOpSelect = document.querySelector('input[name="opbaseselect"]:checked').value;
-    if (radioOutput == 0) { 
-        radioOutput = document.getElementById("opbaseselect").value;
+    if (radioOpSelect == 0) { 
+        radioOpSelect = document.getElementById("opbaseselect").value;
     }
-    if (radioOutput > 10) {
+    if (radioOpSelect > 10) {
         return;
     }    
 
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // CONVERSION // NO ARITHMETIC // CONVERSION // NO ARITHMETIC // CONVERSION // NO ARITHMETIC // CONVERSION // NO ARITHMETIC //
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// CONVERSION // NO ARITHMETIC // CONVERSION // NO ARITHMETIC // CONVERSION // NO ARITHMETIC // CONVERSION //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     if (document.querySelector('input[name="operations"]:checked').value == "convert") {
 
@@ -166,13 +142,14 @@ BUTTON.addEventListener("click", () => {
         SOLUTION.appendChild(newLine);
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // ARITHMETIC // ARITHMETIC // ARITHMETIC // ARITHMETIC // ARITHMETIC // ARITHMETIC // ARITHMETIC // ARITHMETIC //
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ARITHMETIC // ARITHMETIC // ARITHMETIC // ARITHMETIC // ARITHMETIC // ARITHMETIC // ARITHMETIC // ARITHMETIC //
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     else {
 
         let operandArray = Array.from(operandNumber.toString()).map(Number);
+
         if (operandArray == "") {
             let newLine = document.createElement("p");
             newLine.innerHTML = `please enter a valid operand`;
@@ -203,25 +180,46 @@ BUTTON.addEventListener("click", () => {
 
             if (inputArray[i] >= radioSelection) {
                 let newLine = document.createElement("p");
-                newLine.innerHTML = `Not a valid input, as ${inputArray[i]} is outside the scope of the chosen base.`;
+                newLine.innerHTML = `Not a valid input`;
                 SOLUTION.appendChild(newLine);
                 return;    
             }
-
-            else if (radioSelection == radioOutput) {
+                // CHECK THIS IN A SEC, IM NOT SO SURE. .... .. . . . ..
+            else if (radioSelection == radioOutput == radioOpSelect) {
                 let calculatedInteger = operation(inputNumber, OPERATIONSINPUT.value)
                 let newLine = document.createElement("p");
                 newLine.innerHTML = `${inputNumber} base ${radioSelection} ${opString} ${OPERATIONSINPUT.value} base ${radioOutput} equals ${calculatedInteger}.`;
                 SOLUTION.appendChild(newLine);
                 return;
                 }    
-            }
-            
-            inputInBase10 += (inputArray[i] * Math.pow(radioSelection, inputArray.length - i - 1));
-            operandInBase10 += (operandArray[i] * Math.pow(radioOutput, operandArray.length - i - 1));
 
-            solutionInBase10 = operation(inputInBase10, operandInBase10);
+
+            inputInBase10 += (inputArray[i] * Math.pow(radioSelection, inputArray.length - i - 1));
+
         }
+
+        for (let j = 0; j < operandArray.length; j++) {
+
+            if (operandArray[j] >= radioOpSelect) {
+                let newLine = document.createElement("p");
+                newLine.innerHTML = `Not a valid input`;
+                SOLUTION.appendChild(newLine);
+                return;    
+            }
+                // CHECK THIS IN A SEC, IM NOT SO SURE. .... .. . . . ..
+            else if (radioSelection == radioOutput == radioOpSelect) {
+                let calculatedInteger = operation(inputNumber, OPERATIONSINPUT.value)
+                let newLine = document.createElement("p");
+                newLine.innerHTML = `${inputNumber} base ${radioSelection} ${opString} ${OPERATIONSINPUT.value} base ${radioOutput} equals ${calculatedInteger}.`;
+                SOLUTION.appendChild(newLine);
+                return;
+                }    
+
+            operandInBase10 += (operandArray[j] * Math.pow(radioOpSelect, operandArray.length - j - 1));
+
+            }
+
+        solutionInBase10 = operation(inputInBase10, operandInBase10);
 
         let solutionArray = [];
         let remainder = solutionInBase10;
@@ -238,7 +236,7 @@ BUTTON.addEventListener("click", () => {
 
     
         let newLine = document.createElement("p");
-        newLine.innerHTML = `${inputNumber} base ${radioSelection} ${opString} ${OPERATIONSINPUT.value} base ${radioOutput} equals ${convertedInteger} base ${radioOutput}.`;
+        newLine.innerHTML = `${inputNumber} base ${radioSelection} ${opString} ${OPERATIONSINPUT.value} base ${radioOpSelect} equals ${convertedInteger} base ${radioOutput}.`;
         SOLUTION.appendChild(newLine);
-
+    }
 })
