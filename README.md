@@ -4,6 +4,6 @@ everyone says to build a calculator to learn javascript, so i decided to make on
 
 currently works for all bases 2-10. more to come.
 
-you can set the input base, operand base, and the base you want the final answer in.
+![image](https://user-images.githubusercontent.com/79169638/199934685-bef9f753-a180-4180-9f09-01254bd542cb.png)
 
-still mired with errors, but we're getting there
+you can set the input base, operand base, and the base you want the final answer in.
